@@ -1,0 +1,424 @@
+/* BusGo design tokens: highway-sign green, asphalt ink, tail-light amber for the one accent. */
+:root {
+  --ink: #1b2a33;
+  --muted: #56666d;
+  --sign: #0b6b4f;
+  --sign-dark: #084f3a;
+  --sign-tint: #e3f1ec;
+  --lamp: #f4b63f;
+  --paper: #eef2f1;
+  --card: #ffffff;
+  --line: #d3dbd9;
+  --danger: #a8231b;
+  --danger-tint: #fbe9e7;
+  --radius: 10px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--sign-dark);
+}
+
+:focus-visible {
+  outline: 3px solid var(--lamp);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.5rem 0.9rem;
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  z-index: 20;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* ---------- navbar ---------- */
+.navbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.navbar-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+}
+.nav-links a {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav-links a:hover {
+  color: var(--ink);
+}
+.nav-links a.active {
+  color: var(--sign-dark);
+  background: var(--sign-tint);
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-user {
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.05rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--sign);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--sign-dark);
+}
+.btn-quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-quiet:hover {
+  background: var(--paper);
+}
+.btn-block {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+}
+.btn:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+/* ---------- page shell ---------- */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+.page-status {
+  color: var(--muted);
+  text-align: center;
+  padding: 3rem 0;
+}
+.hero p {
+  color: var(--muted);
+  max-width: 60ch;
+}
+.placeholder-panel {
+  margin-top: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  text-align: center;
+}
+.placeholder-panel p {
+  margin: 0 auto;
+}
+.message-page {
+  max-width: 34rem;
+  margin: 3rem auto;
+  text-align: center;
+}
+.message-page p {
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+
+/* ---------- ticket card (login / register) ---------- */
+.ticket {
+  --stub-width: 15rem;
+  --notch: 1.4rem;
+  display: flex;
+  max-width: 46rem;
+  margin: 1rem auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.ticket-stub {
+  position: relative;
+  flex: 0 0 var(--stub-width);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--sign);
+  color: #fff;
+}
+/* Perforation between stub and body, with the two half-circle notches. */
+.ticket-stub::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -1px;
+  border-right: 3px dashed rgba(255, 255, 255, 0.55);
+}
+.ticket-body {
+  position: relative;
+  flex: 1;
+  padding: 2rem 2rem 1.75rem;
+}
+.ticket-body::before,
+.ticket-body::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--notch) / -2);
+  width: var(--notch);
+  height: var(--notch);
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.ticket-body::before {
+  top: calc(var(--notch) / -2);
+}
+.ticket-body::after {
+  bottom: calc(var(--notch) / -2);
+}
+.stub-label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+.stub-route {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.stub-city {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.stub-line {
+  width: 2px;
+  height: 2.2rem;
+  margin-left: 0.35rem;
+  background: repeating-linear-gradient(to bottom, var(--lamp) 0 6px, transparent 6px 11px);
+}
+.stub-seat {
+  align-self: flex-start;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--lamp);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+.ticket-subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+.auth-switch {
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+}
+
+/* ---------- forms ---------- */
+.field {
+  margin-bottom: 1rem;
+}
+.field label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+.field input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #9aa9a6;
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+.field input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+.field-hint {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.field-error {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: var(--danger);
+}
+.form-error {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.85rem;
+  border-left: 4px solid var(--danger);
+  border-radius: 6px;
+  background: var(--danger-tint);
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* ---------- toasts ---------- */
+.toast-area {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(24rem, calc(100vw - 2rem));
+}
+.toast {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: #fff;
+  border-left: 5px solid var(--lamp);
+  box-shadow: 0 6px 20px rgba(27, 42, 51, 0.25);
+}
+.toast-success {
+  border-left-color: #3ecf8e;
+}
+.toast-error {
+  border-left-color: #ff6b5e;
+}
+.toast-close {
+  padding: 0 0.25rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 720px) {
+  .ticket {
+    flex-direction: column;
+  }
+  .ticket-stub {
+    flex: none;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.1rem 1.25rem;
+  }
+  .stub-route {
+    flex-direction: row;
+    align-items: center;
+  }
+  .stub-line {
+    width: 2rem;
+    height: 2px;
+    margin: 0;
+    background: repeating-linear-gradient(to right, var(--lamp) 0 6px, transparent 6px 11px);
+  }
+  .stub-label {
+    display: none;
+  }
+  .ticket-stub::after {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    border-right: 0;
+    border-bottom: 3px dashed rgba(255, 255, 255, 0.55);
+  }
+  .ticket-body {
+    padding: 1.5rem 1.25rem;
+  }
+  .ticket-body::before {
+    top: calc(var(--notch) / -2);
+    left: calc(var(--notch) / -2);
+  }
+  .ticket-body::after {
+    top: calc(var(--notch) / -2);
+    bottom: auto;
+    left: auto;
+    right: calc(var(--notch) / -2);
+  }
+  .nav-links {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

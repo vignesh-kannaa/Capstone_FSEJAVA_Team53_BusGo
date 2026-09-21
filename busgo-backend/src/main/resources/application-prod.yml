@@ -1,0 +1,17 @@
+# Prod profile: PostgreSQL. All secrets come from environment variables.
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/busgo}
+    username: ${DB_USERNAME:busgo}
+    password: ${DB_PASSWORD:busgo}
+  h2:
+    console:
+      enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+busgo:
+  jwt:
+    # No default on purpose: the app must fail to start if JWT_SECRET is missing.
+    secret: ${JWT_SECRET}
